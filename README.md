@@ -68,7 +68,7 @@ src/
 - ✅ Design totalmente responsivo
 - ✅ Seguindo o Design System SuperPet
 
-## 🎯 Rotas
+## 🗺️ Rotas
 
 - `/` - Home (sem sidebar)
 - `/dashboard` - Dashboard (com sidebar)
@@ -81,14 +81,13 @@ src/
 - **Tablet**: 768px - 1024px
 - **Desktop**: > 1024px
 
-## 🔧 Scripts Disponíveis
+## 🛠️ Scripts Disponíveis
 
 - `npm run dev` - Inicia o servidor de desenvolvimento
 - `npm run build` - Cria uma build de produção
 - `npm run preview` - Preview da build de produção
 - `npm run lint` - Executa o linter
 
-## 📝 Licença
+## 📄 Licença
 
 Este projeto é privado e desenvolvido para SuperPet Store.
-
