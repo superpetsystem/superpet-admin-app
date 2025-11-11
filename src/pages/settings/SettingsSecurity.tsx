@@ -6,6 +6,7 @@ const SettingsSecurity = () => {
 
   return (
     <Box>
+      {/* Cabeçalho dedicado à segurança da conta e da loja. */}
       <Box sx={{ mb: 4 }}>
         <Typography
           variant="h4"
@@ -35,6 +36,7 @@ const SettingsSecurity = () => {
         }}
       >
         <CardContent>
+          {/* Espaço para MFA, políticas de senha e auditoria. */}
           <Typography
             variant="h6"
             sx={{

@@ -12,17 +12,18 @@ const Layout = () => {
   const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  // Home não tem sidebar
+  // A rota raiz (Visão Geral) funciona como landing do painel e oculta a sidebar.
   const showSidebar = location.pathname !== '/';
 
-  // Ler estado do sidebar colapsado do localStorage
+  // Estado controlando o colapso da sidebar, persistido no localStorage.
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   useEffect(() => {
+    // Recupera configuração persistida assim que o layout monta.
     const saved = localStorage.getItem('sidebarCollapsed');
     setSidebarCollapsed(saved === 'true');
     
-    // Escutar mudanças no localStorage
+    // Escuta mudanças em outras abas/janelas para manter a UI sincronizada.
     const handleStorageChange = () => {
       const newValue = localStorage.getItem('sidebarCollapsed') === 'true';
       setSidebarCollapsed(newValue);
@@ -30,7 +31,7 @@ const Layout = () => {
 
     window.addEventListener('storage', handleStorageChange);
     
-    // Verificar mudanças periodicamente (para mesma aba)
+    // No mesmo contexto (aba atual) não há evento de storage, então usamos pooling simples.
     const interval = setInterval(() => {
       const saved = localStorage.getItem('sidebarCollapsed');
       const newValue = saved === 'true';
@@ -45,17 +46,20 @@ const Layout = () => {
     };
   }, [sidebarCollapsed]);
 
-  // Calcular largura da sidebar baseado no estado colapsado
-  const sidebarWidth = sidebarCollapsed ? 72 : 260;
+  // Ajusta dinamicamente a largura do drawer permanente.
+  const sidebarWidth = sidebarCollapsed ? 72 : 220;
 
   const handleDrawerToggle = () => {
+    // Controla a abertura do drawer mobile (variante temporary).
     setMobileOpen(!mobileOpen);
   };
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      {/* Header contém navegação, ações rápidas e toggle de tema. */}
       <Header onMenuClick={handleDrawerToggle} showMenuButton={showSidebar && isMobile} />
       <Box sx={{ display: 'flex', flex: 1, mt: '64px' }}>
+        {/* Sidebar só é exibida em rotas internas; no mobile vira drawer temporário. */}
         {showSidebar && <Sidebar mobileOpen={mobileOpen} onMobileClose={handleDrawerToggle} />}
         <Box
           component="main"
@@ -71,6 +75,7 @@ const Layout = () => {
             transition: 'width 0.3s ease',
           }}
         >
+          {/* Outlet injeta a página específica da rota ativa. */}
           <Outlet />
         </Box>
       </Box>

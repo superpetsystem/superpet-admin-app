@@ -6,6 +6,7 @@ const SettingsNotifications = () => {
 
   return (
     <Box>
+      {/* Cabeçalho da página de notificações. */}
       <Box sx={{ mb: 4 }}>
         <Typography
           variant="h4"
@@ -35,6 +36,7 @@ const SettingsNotifications = () => {
         }}
       >
         <CardContent>
+          {/* Espaço para canais, preferências e frequência de alertas. */}
           <Typography
             variant="h6"
             sx={{

@@ -17,6 +17,8 @@ import {
 } from '@mui/icons-material';
 import { ReactElement } from 'react';
 
+// Estruturas auxiliares que descrevem a navegação da sidebar.
+
 export interface SidebarMenuItem {
   label: string;
   path: string;
@@ -33,34 +35,34 @@ export interface SidebarSection {
 export const sidebarMenuData: SidebarSection[] = [
   {
     mainPath: '/dashboard',
-    mainLabel: 'Dashboard',
+    mainLabel: 'Painel',
     mainIcon: <DashboardIcon />,
     relatedPages: [
-      { label: 'Visão Geral', path: '/dashboard', icon: <DashboardIcon /> },
+      { label: 'Resumo Executivo', path: '/dashboard', icon: <DashboardIcon /> },
       { label: 'Vendas', path: '/dashboard/sales', icon: <ShoppingCart /> },
-      { label: 'Análise', path: '/dashboard/analytics', icon: <TrendingUp /> },
+      { label: 'Análises', path: '/dashboard/analytics', icon: <TrendingUp /> },
       { label: 'Clientes', path: '/dashboard/customers', icon: <People /> },
       { label: 'Estoque', path: '/dashboard/inventory', icon: <Inventory /> },
     ],
   },
   {
     mainPath: '/reports',
-    mainLabel: 'Reports',
+    mainLabel: 'Relatórios',
     mainIcon: <ReportsIcon />,
     relatedPages: [
       { label: 'Relatórios Gerais', path: '/reports', icon: <ReportsIcon /> },
-      { label: 'Vendas', path: '/reports/sales', icon: <Receipt /> },
+      { label: 'Relatório de Vendas', path: '/reports/sales', icon: <Receipt /> },
       { label: 'Gráficos', path: '/reports/charts', icon: <BarChart /> },
       { label: 'Estatísticas', path: '/reports/statistics', icon: <PieChart /> },
-      { label: 'Exportar', path: '/reports/export', icon: <FileDownload /> },
+      { label: 'Exportações', path: '/reports/export', icon: <FileDownload /> },
     ],
   },
   {
     mainPath: '/settings',
-    mainLabel: 'Settings',
+    mainLabel: 'Configurações',
     mainIcon: <SettingsIcon />,
     relatedPages: [
-      { label: 'Configurações Gerais', path: '/settings', icon: <SettingsIcon /> },
+      { label: 'Preferências Gerais', path: '/settings', icon: <SettingsIcon /> },
       { label: 'Loja', path: '/settings/store', icon: <Store /> },
       { label: 'Notificações', path: '/settings/notifications', icon: <Notifications /> },
       { label: 'Aparência', path: '/settings/appearance', icon: <Palette /> },

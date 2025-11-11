@@ -6,6 +6,7 @@ const Reports = () => {
 
   return (
     <Box>
+      {/* Introdução da página de Relatórios. */}
       <Box sx={{ mb: 4 }}>
         <Typography
           variant="h4"
@@ -37,6 +38,7 @@ const Reports = () => {
             }}
           >
             <CardContent>
+              {/* Área para tabelas, gráficos e filtros de exportação. */}
               <Typography
                 variant="h6"
                 sx={{

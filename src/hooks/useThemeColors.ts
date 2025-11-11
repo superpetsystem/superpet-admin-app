@@ -1,5 +1,6 @@
 import { useThemeMode } from '../context/ThemeContext';
 
+// Hook utilitário que centraliza as cores utilizadas em componentes customizados.
 export const useThemeColors = () => {
   const { isDark } = useThemeMode();
 

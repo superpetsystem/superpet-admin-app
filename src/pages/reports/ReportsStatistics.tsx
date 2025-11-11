@@ -6,6 +6,7 @@ const ReportsStatistics = () => {
 
   return (
     <Box>
+      {/* Cabeçalho para métricas avançadas e comparativos. */}
       <Box sx={{ mb: 4 }}>
         <Typography
           variant="h4"
@@ -35,6 +36,7 @@ const ReportsStatistics = () => {
         }}
       >
         <CardContent>
+          {/* Espaço ideal para indicadores estatísticos e KPIs combinados. */}
           <Typography
             variant="h6"
             sx={{

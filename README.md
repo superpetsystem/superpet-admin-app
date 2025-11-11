@@ -49,7 +49,7 @@ src/
 ├── context/          # Contextos React
 │   └── ThemeContext.tsx  # Contexto de tema claro/escuro
 ├── pages/            # Páginas da aplicação
-│   ├── Home.tsx
+│   ├── Overview.tsx
 │   ├── Dashboard.tsx
 │   ├── Reports.tsx
 │   └── Settings.tsx
@@ -60,17 +60,17 @@ src/
 ## ✨ Funcionalidades
 
 - ✅ Header responsivo com logo e navegação
-- ✅ Menu de navegação (Home, Dashboard, Reports, Settings)
+- ✅ Menu de navegação (Visão Geral, Painel, Relatórios, Configurações)
 - ✅ Sistema de notificações
 - ✅ Toggle de tema claro/escuro
 - ✅ Menu do usuário
-- ✅ Sidebar condicional (não aparece na Home)
+- ✅ Sidebar condicional (não aparece na Visão Geral)
 - ✅ Design totalmente responsivo
 - ✅ Seguindo o Design System SuperPet
 
 ## 🗺️ Rotas
 
-- `/` - Home (sem sidebar)
+- `/` - Visão Geral (sem sidebar)
 - `/dashboard` - Dashboard (com sidebar)
 - `/reports` - Relatórios (com sidebar)
 - `/settings` - Configurações (com sidebar)

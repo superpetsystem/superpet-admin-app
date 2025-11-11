@@ -2,9 +2,10 @@ import { Box, Typography, Card, CardContent, Button, Grid } from '@mui/material'
 import { ShoppingCart, TrendingUp, People, Inventory } from '@mui/icons-material';
 import { useThemeMode } from '../context/ThemeContext';
 
-const Home = () => {
+const Overview = () => {
   const { isDark } = useThemeMode();
 
+  // Cards simulando KPIs principais do painel administrativo.
   const statsCards = [
     {
       title: 'Vendas Hoje',
@@ -38,7 +39,7 @@ const Home = () => {
 
   return (
     <Box>
-      {/* Hero Section */}
+      {/* Hero Section - mensagem principal do painel administrativo. */}
       <Box sx={{ mb: 6, textAlign: { xs: 'center', md: 'left' } }}>
         <Typography
           variant="h3"
@@ -49,7 +50,7 @@ const Home = () => {
             fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
           }}
         >
-          Bem-vindo ao SuperPet! 🐾
+          Painel Administrativo SuperPet 🐾
         </Typography>
         <Typography
           variant="h6"
@@ -59,7 +60,7 @@ const Home = () => {
             fontSize: { xs: '1rem', sm: '1.25rem' },
           }}
         >
-          Gerencie sua loja de pets com facilidade e eficiência
+          Acompanhe indicadores e tome decisões rápidas para sua loja.
         </Typography>
         <Button
           variant="contained"
@@ -73,11 +74,11 @@ const Home = () => {
             '&:hover': { bgcolor: '#0A5152' },
           }}
         >
-          Começar Agora
+          Ver Indicadores
         </Button>
       </Box>
 
-      {/* Stats Cards */}
+      {/* Cards de destaque com métricas rápidas. */}
       <Grid container spacing={3} sx={{ mb: 6 }}>
         {statsCards.map((stat, index) => (
           <Grid item xs={12} sm={6} md={3} key={index}>
@@ -146,7 +147,7 @@ const Home = () => {
         ))}
       </Grid>
 
-      {/* Quick Actions */}
+      {/* Seção de atalhos para ações frequentes do time. */}
       <Card
         sx={{
           bgcolor: isDark ? '#1C2128' : '#F8F5EE',
@@ -174,7 +175,7 @@ const Home = () => {
                 '&:hover': { bgcolor: '#0A5152' },
               }}
             >
-              Nova Venda
+              Registrar Venda
             </Button>
             <Button
               variant="contained"
@@ -197,7 +198,7 @@ const Home = () => {
                 },
               }}
             >
-              Ver Relatórios
+              Abrir Relatórios
             </Button>
           </Box>
         </CardContent>
@@ -206,4 +207,5 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Overview;
+

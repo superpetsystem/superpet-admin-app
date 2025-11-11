@@ -6,6 +6,7 @@ const ReportsCharts = () => {
 
   return (
     <Box>
+      {/* Cabeçalho da área focada em visualizações gráficas. */}
       <Box sx={{ mb: 4 }}>
         <Typography
           variant="h4"
@@ -35,6 +36,7 @@ const ReportsCharts = () => {
         }}
       >
         <CardContent>
+          {/* Espaço ideal para componentes de charting (Recharts, ECharts, etc.). */}
           <Typography
             variant="h6"
             sx={{

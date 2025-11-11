@@ -6,6 +6,7 @@ const SettingsAppearance = () => {
 
   return (
     <Box>
+      {/* Cabeçalho da área de personalização visual. */}
       <Box sx={{ mb: 4 }}>
         <Typography
           variant="h4"
@@ -35,6 +36,7 @@ const SettingsAppearance = () => {
         }}
       >
         <CardContent>
+          {/* Espaço para temas, paletas e preferências de layout. */}
           <Typography
             variant="h6"
             sx={{

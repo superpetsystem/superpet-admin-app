@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   Drawer,
   ListItemButton,
@@ -11,17 +11,17 @@ import {
   Tooltip,
   useMediaQuery,
   useTheme as useMUITheme,
-} from '@mui/material';
-import { ChevronLeft, ChevronRight } from '@mui/icons-material';
-import { useThemeMode } from '../context/ThemeContext';
-import { sidebarMenuData } from '../data/sidebarMenu';
+} from "@mui/material";
+import { ChevronLeft, ChevronRight } from "@mui/icons-material";
+import { useThemeMode } from "../context/ThemeContext";
+import { sidebarMenuData } from "../data/sidebarMenu";
 
 interface SidebarProps {
   mobileOpen: boolean;
   onMobileClose: () => void;
 }
 
-const drawerWidth = 260;
+const drawerWidth = 220;
 const collapsedDrawerWidth = 72;
 
 const Sidebar = ({ mobileOpen, onMobileClose }: SidebarProps) => {
@@ -29,22 +29,26 @@ const Sidebar = ({ mobileOpen, onMobileClose }: SidebarProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const muiTheme = useMUITheme();
-  const isMobile = useMediaQuery(muiTheme.breakpoints.down('md'));
+  const isMobile = useMediaQuery(muiTheme.breakpoints.down("md"));
   const [collapsed, setCollapsed] = useState(false);
 
-  // Persistir estado do collapse no localStorage
+  // Em dispositivos móveis mantemos sempre a versão expandida.
+  const isCollapsed = isMobile ? false : collapsed;
+
+  // Ao montar, aplicamos o estado salvo para manter preferências do usuário.
   useEffect(() => {
-    const saved = localStorage.getItem('sidebarCollapsed');
+    const saved = localStorage.getItem("sidebarCollapsed");
     if (saved !== null) {
-      setCollapsed(saved === 'true');
+      setCollapsed(saved === "true");
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('sidebarCollapsed', collapsed.toString());
+    // Qualquer mudança é salva para persistir entre sessões/abas.
+    localStorage.setItem("sidebarCollapsed", collapsed.toString());
   }, [collapsed]);
 
-  // Encontrar a seção atual baseada na rota
+  // Determina qual seção do menu deve ser destacada de acordo com a URL atual.
   const getCurrentSection = () => {
     const currentPath = location.pathname;
     for (const section of sidebarMenuData) {
@@ -58,6 +62,7 @@ const Sidebar = ({ mobileOpen, onMobileClose }: SidebarProps) => {
   const currentSection = getCurrentSection();
 
   const handleNavigation = (path: string) => {
+    // Atualiza a rota e fecha o drawer quando estamos no mobile.
     navigate(path);
     if (isMobile) {
       onMobileClose();
@@ -65,39 +70,42 @@ const Sidebar = ({ mobileOpen, onMobileClose }: SidebarProps) => {
   };
 
   const toggleCollapse = () => {
+    // Alterna entre a sidebar colapsada (mini icons) e expandida.
     setCollapsed(!collapsed);
   };
 
   const drawer = (
     <Box
       sx={{
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        bgcolor: isDark ? '#1C2128' : '#F8F5EE',
-        position: 'relative',
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        bgcolor: isDark ? "#1C2128" : "#F8F5EE",
+        position: "relative",
       }}
     >
-      {/* Header com título - sem ícone, sem active */}
+      {/* Header com o título do módulo atual. */}
       <Box
         sx={{
-          px: collapsed ? 2 : 3,
+          px: isCollapsed ? 2 : 3,
           py: 3.5,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: collapsed ? 'center' : 'flex-start',
+          display: "flex",
+          alignItems: "center",
+          justifyContent: isCollapsed ? "center" : "flex-start",
           minHeight: 80,
-          borderBottom: isDark ? '1px solid rgba(18, 136, 138, 0.15)' : '1px solid rgba(14, 106, 107, 0.1)',
+          borderBottom: isDark
+            ? "1px solid rgba(18, 136, 138, 0.15)"
+            : "1px solid rgba(14, 106, 107, 0.1)",
         }}
       >
-        {!collapsed && (
+        {!isCollapsed && (
           <Typography
             variant="h6"
             sx={{
-              color: isDark ? '#12888A' : '#0E6A6B',
+              color: isDark ? "#12888A" : "#0E6A6B",
               fontWeight: 700,
-              fontSize: '1.25rem',
-              letterSpacing: '0.3px',
+              fontSize: "1.25rem",
+              letterSpacing: "0.3px",
             }}
           >
             {currentSection.mainLabel}
@@ -105,10 +113,10 @@ const Sidebar = ({ mobileOpen, onMobileClose }: SidebarProps) => {
         )}
       </Box>
 
-      {/* Lista de navegação */}
-      <Box sx={{ flexGrow: 1, overflow: 'auto', py: 2 }}>
+      {/* Lista de itens relacionada à seção ativa. */}
+      <Box sx={{ flexGrow: 1, overflow: "auto", py: 2 }}>
         {/* Separador visual */}
-        {!collapsed && (
+        {!isCollapsed && (
           <Box
             sx={{
               px: 3,
@@ -119,11 +127,13 @@ const Sidebar = ({ mobileOpen, onMobileClose }: SidebarProps) => {
             <Typography
               variant="caption"
               sx={{
-                color: isDark ? 'rgba(230, 225, 214, 0.5)' : 'rgba(110, 110, 110, 0.7)',
-                fontSize: '0.6875rem',
+                color: isDark
+                  ? "rgba(230, 225, 214, 0.5)"
+                  : "rgba(110, 110, 110, 0.7)",
+                fontSize: "0.6875rem",
                 fontWeight: 600,
-                textTransform: 'uppercase',
-                letterSpacing: '1.2px',
+                textTransform: "uppercase",
+                letterSpacing: "1.2px",
               }}
             >
               Menu
@@ -132,48 +142,58 @@ const Sidebar = ({ mobileOpen, onMobileClose }: SidebarProps) => {
         )}
 
         {/* Páginas relacionadas */}
-        <Box sx={{ px: collapsed ? 1 : 2 }}>
+        <Box sx={{ px: isCollapsed ? 1 : 2 }}>
           {currentSection.relatedPages.map((item) => {
             const isActive = location.pathname === item.path;
             return (
-              <Tooltip key={item.path} title={collapsed ? item.label : ''} placement="right">
+              <Tooltip
+                key={item.path}
+                title={isCollapsed ? item.label : ""}
+                placement="right"
+              >
                 <ListItemButton
                   onClick={() => handleNavigation(item.path)}
                   sx={{
                     borderRadius: 2.5,
                     bgcolor: isActive
-                      ? isDark ? 'rgba(14, 106, 107, 0.25)' : 'rgba(14, 106, 107, 0.15)'
-                      : 'transparent',
+                      ? isDark
+                        ? "rgba(14, 106, 107, 0.25)"
+                        : "rgba(14, 106, 107, 0.15)"
+                      : "transparent",
                     color: isActive
-                      ? isDark ? '#F8F5EE' : '#0E6A6B'
+                      ? isDark
+                        ? "#F8F5EE"
+                        : "#0E6A6B"
                       : isDark
-                      ? 'rgba(248, 245, 238, 0.7)'
-                      : 'rgba(30, 30, 30, 0.7)',
-                    '&:hover': {
+                      ? "rgba(248, 245, 238, 0.7)"
+                      : "rgba(30, 30, 30, 0.7)",
+                    "&:hover": {
                       bgcolor: isActive
-                        ? isDark ? 'rgba(14, 106, 107, 0.35)' : 'rgba(14, 106, 107, 0.25)'
+                        ? isDark
+                          ? "rgba(14, 106, 107, 0.35)"
+                          : "rgba(14, 106, 107, 0.25)"
                         : isDark
-                        ? 'rgba(18, 136, 138, 0.12)'
-                        : 'rgba(14, 106, 107, 0.08)',
+                        ? "rgba(18, 136, 138, 0.12)"
+                        : "rgba(14, 106, 107, 0.08)",
                     },
-                    transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                    transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
                     py: 1.5,
-                    px: collapsed ? 1.5 : 2.5,
+                    px: isCollapsed ? 1.5 : 2.5,
                     mb: 0.5,
-                    justifyContent: collapsed ? 'center' : 'flex-start',
+                    justifyContent: isCollapsed ? "center" : "flex-start",
                     minHeight: 48,
-                    position: 'relative',
-                    '&::before': isActive
+                    position: "relative",
+                    "&::before": isActive
                       ? {
                           content: '""',
-                          position: 'absolute',
+                          position: "absolute",
                           left: 0,
-                          top: '50%',
-                          transform: 'translateY(-50%)',
+                          top: "50%",
+                          transform: "translateY(-50%)",
                           width: 3,
-                          height: '70%',
-                          bgcolor: '#E47B24',
-                          borderRadius: '0 2px 2px 0',
+                          height: "70%",
+                          bgcolor: "#E47B24",
+                          borderRadius: "0 2px 2px 0",
                         }
                       : {},
                   }}
@@ -181,23 +201,25 @@ const Sidebar = ({ mobileOpen, onMobileClose }: SidebarProps) => {
                   <ListItemIcon
                     sx={{
                       color: isActive
-                        ? isDark ? '#F8F5EE' : '#0E6A6B'
+                        ? isDark
+                          ? "#F8F5EE"
+                          : "#0E6A6B"
                         : isDark
-                        ? 'rgba(14, 106, 107, 0.8)'
-                        : '#0E6A6B',
-                      minWidth: collapsed ? 0 : 40,
-                      justifyContent: 'center',
-                      mr: collapsed ? 0 : 1.5,
+                        ? "rgba(14, 106, 107, 0.8)"
+                        : "#0E6A6B",
+                      minWidth: isCollapsed ? 0 : 40,
+                      justifyContent: "center",
+                      mr: isCollapsed ? 0 : 1.5,
                     }}
                   >
                     {item.icon}
                   </ListItemIcon>
-                  {!collapsed && (
+                  {!isCollapsed && (
                     <ListItemText
                       primary={item.label}
                       primaryTypographyProps={{
                         fontWeight: isActive ? 600 : 400,
-                        fontSize: '0.9375rem',
+                        fontSize: "0.9375rem",
                       }}
                     />
                   )}
@@ -210,7 +232,7 @@ const Sidebar = ({ mobileOpen, onMobileClose }: SidebarProps) => {
     </Box>
   );
 
-  const currentDrawerWidth = collapsed ? collapsedDrawerWidth : drawerWidth;
+  const currentDrawerWidth = isCollapsed ? collapsedDrawerWidth : drawerWidth;
 
   return (
     <Box
@@ -218,39 +240,52 @@ const Sidebar = ({ mobileOpen, onMobileClose }: SidebarProps) => {
       sx={{
         width: { md: currentDrawerWidth },
         flexShrink: { md: 0 },
-        transition: 'width 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-        position: 'relative',
+        transition: "width 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+        position: "relative",
       }}
     >
       {/* Botão de toggle na borda direita - apenas desktop, estilo iFood */}
       {!isMobile && (
-        <Tooltip title={collapsed ? 'Expandir sidebar' : 'Recolher sidebar'} placement="left">
+        <Tooltip
+          title={isCollapsed ? "Expandir sidebar" : "Recolher sidebar"}
+          placement="left"
+        >
           <IconButton
             onClick={toggleCollapse}
             sx={{
-              position: 'absolute',
+              position: "absolute",
               right: -18,
               top: 20,
               zIndex: 1200,
-              width: 36,
-              height: 36,
-              bgcolor: '#FFFFFF',
-              color: '#EA1D2C',
-              boxShadow: '0 2px 10px rgba(0, 0, 0, 0.12), 0 4px 20px rgba(0, 0, 0, 0.08)',
-              border: 'none',
-              borderRadius: '50%',
-              '&:hover': {
-                bgcolor: '#FFFFFF',
-                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.16), 0 8px 24px rgba(0, 0, 0, 0.12)',
-                transform: 'scale(1.05)',
+              width: 34,
+              height: 34,
+              bgcolor: "#FFFFFF",
+              color: "#EA1D2C",
+              boxShadow: "0 4px 12px rgba(234, 29, 44, 0.25)",
+              border: "1px solid rgba(234, 29, 44, 0.35)",
+              borderRadius: "18px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 0.25,
+              pl: 2.25,
+              pr: 1,
+              "&:hover": {
+                bgcolor: "#FFFFFF",
+                boxShadow: "0 6px 18px rgba(234, 29, 44, 0.32)",
+                transform: "scale(1.05)",
               },
-              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-              '&:active': {
-                transform: 'scale(0.95)',
+              transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+              "&:active": {
+                transform: "scale(0.95)",
               },
             }}
           >
-            {collapsed ? <ChevronRight fontSize="small" /> : <ChevronLeft fontSize="small" />}
+            {isCollapsed ? (
+              <ChevronRight fontSize="inherit" />
+            ) : (
+              <ChevronLeft fontSize="inherit" />
+            )}
           </IconButton>
         </Tooltip>
       )}
@@ -263,13 +298,15 @@ const Sidebar = ({ mobileOpen, onMobileClose }: SidebarProps) => {
           keepMounted: true,
         }}
         sx={{
-          display: { xs: 'block', md: 'none' },
-          '& .MuiDrawer-paper': {
-            boxSizing: 'border-box',
+          display: { xs: "block", md: "none" },
+          "& .MuiDrawer-paper": {
+            boxSizing: "border-box",
             width: drawerWidth,
-            bgcolor: isDark ? '#1C2128' : '#F8F5EE',
-            borderRight: isDark ? '1px solid rgba(18, 136, 138, 0.2)' : '1px solid rgba(14, 106, 107, 0.15)',
-            transition: 'width 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+            bgcolor: isDark ? "#1C2128" : "#F8F5EE",
+            borderRight: isDark
+              ? "1px solid rgba(18, 136, 138, 0.2)"
+              : "1px solid rgba(14, 106, 107, 0.15)",
+            transition: "width 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
           },
         }}
       >
@@ -280,29 +317,35 @@ const Sidebar = ({ mobileOpen, onMobileClose }: SidebarProps) => {
       <Drawer
         variant="permanent"
         sx={{
-          display: { xs: 'none', md: 'block' },
-          '& .MuiDrawer-paper': {
-            boxSizing: 'border-box',
+          display: { xs: "none", md: "block" },
+          "& .MuiDrawer-paper": {
+            boxSizing: "border-box",
             width: currentDrawerWidth,
-            bgcolor: isDark ? '#1C2128' : '#F8F5EE',
-            borderRight: isDark ? '1px solid rgba(18, 136, 138, 0.2)' : '1px solid rgba(14, 106, 107, 0.15)',
-            transition: 'width 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-            overflowX: 'hidden',
-            overflowY: 'auto',
-            boxShadow: isDark 
-              ? '2px 0 8px rgba(0, 0, 0, 0.3)' 
-              : '2px 0 8px rgba(0, 0, 0, 0.05)',
-            '&::-webkit-scrollbar': {
-              width: '6px',
+            bgcolor: isDark ? "#1C2128" : "#F8F5EE",
+            borderRight: isDark
+              ? "1px solid rgba(18, 136, 138, 0.2)"
+              : "1px solid rgba(14, 106, 107, 0.15)",
+            transition: "width 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+            overflowX: "hidden",
+            overflowY: "auto",
+            boxShadow: isDark
+              ? "2px 0 8px rgba(0, 0, 0, 0.3)"
+              : "2px 0 8px rgba(0, 0, 0, 0.05)",
+            "&::-webkit-scrollbar": {
+              width: "6px",
             },
-            '&::-webkit-scrollbar-track': {
-              bgcolor: 'transparent',
+            "&::-webkit-scrollbar-track": {
+              bgcolor: "transparent",
             },
-            '&::-webkit-scrollbar-thumb': {
-              bgcolor: isDark ? 'rgba(18, 136, 138, 0.3)' : 'rgba(14, 106, 107, 0.25)',
-              borderRadius: '3px',
-              '&:hover': {
-                bgcolor: isDark ? 'rgba(18, 136, 138, 0.5)' : 'rgba(14, 106, 107, 0.4)',
+            "&::-webkit-scrollbar-thumb": {
+              bgcolor: isDark
+                ? "rgba(18, 136, 138, 0.3)"
+                : "rgba(14, 106, 107, 0.25)",
+              borderRadius: "3px",
+              "&:hover": {
+                bgcolor: isDark
+                  ? "rgba(18, 136, 138, 0.5)"
+                  : "rgba(14, 106, 107, 0.4)",
               },
             },
           },

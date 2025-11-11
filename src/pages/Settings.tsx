@@ -6,6 +6,7 @@ const Settings = () => {
 
   return (
     <Box>
+      {/* Cabeçalho para contextualizar a seção de configurações gerais. */}
       <Box sx={{ mb: 4 }}>
         <Typography
           variant="h4"
@@ -37,6 +38,7 @@ const Settings = () => {
             }}
           >
             <CardContent>
+              {/* Formulário principal para dados institucionais. */}
               <Typography
                 variant="h6"
                 sx={{
@@ -109,6 +111,7 @@ const Settings = () => {
             }}
           >
             <CardContent>
+              {/* Espaço para preferências avançadas, integrações e personalizações. */}
               <Typography
                 variant="h6"
                 sx={{

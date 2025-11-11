@@ -6,6 +6,7 @@ const Dashboard = () => {
 
   return (
     <Box>
+      {/* Header da página do módulo de dashboard. */}
       <Box sx={{ mb: 4 }}>
         <Typography
           variant="h4"
@@ -37,6 +38,7 @@ const Dashboard = () => {
             }}
           >
             <CardContent>
+              {/* Área reservada para widgets e gráficos reais. */}
               <Typography
                 variant="h6"
                 sx={{

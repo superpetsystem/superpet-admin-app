@@ -44,11 +44,12 @@ const Header = ({ onMenuClick, showMenuButton = false }: HeaderProps) => {
   const [userAnchor, setUserAnchor] = useState<null | HTMLElement>(null);
   const [navMenuAnchor, setNavMenuAnchor] = useState<null | HTMLElement>(null);
 
+  // Navegação principal exibida no header (desktop e mobile).
   const menuItems = [
-    { label: 'Home', path: '/' },
-    { label: 'Dashboard', path: '/dashboard' },
-    { label: 'Reports', path: '/reports' },
-    { label: 'Settings', path: '/settings' },
+    { label: 'Visão Geral', path: '/' },
+    { label: 'Painel', path: '/dashboard' },
+    { label: 'Relatórios', path: '/reports' },
+    { label: 'Configurações', path: '/settings' },
   ];
 
   const handleNotifOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -86,7 +87,7 @@ const Header = ({ onMenuClick, showMenuButton = false }: HeaderProps) => {
   return (
     <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
       <Toolbar sx={{ px: { xs: 2, sm: 3 } }}>
-        {/* Botão Menu Mobile */}
+        {/* Botão do menu lateral quando estamos em telas pequenas. */}
         {showMenuButton && (
           <IconButton
             color="inherit"
@@ -105,7 +106,7 @@ const Header = ({ onMenuClick, showMenuButton = false }: HeaderProps) => {
           </IconButton>
         )}
 
-        {/* Logo e Nome */}
+        {/* Logo reduzido e título do sistema. */}
         <Box sx={{ display: 'flex', alignItems: 'center', mr: { xs: 2, sm: 4 } }}>
           <Typography
             variant="h6"
@@ -124,7 +125,7 @@ const Header = ({ onMenuClick, showMenuButton = false }: HeaderProps) => {
           </Typography>
         </Box>
 
-        {/* Menu de Navegação - Desktop */}
+        {/* Links principais quando há espaço disponível (>= md). */}
         {!isMobile && (
           <Box sx={{ display: 'flex', gap: 1, flexGrow: 1 }}>
             {menuItems.map((item) => (
@@ -153,7 +154,7 @@ const Header = ({ onMenuClick, showMenuButton = false }: HeaderProps) => {
           </Box>
         )}
 
-        {/* Menu de Navegação Mobile - Três Pontinhos */}
+        {/* Em mobile substituímos as tabs por um menu de três pontos. */}
         {isMobile && (
           <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end' }}>
             <IconButton
@@ -170,7 +171,7 @@ const Header = ({ onMenuClick, showMenuButton = false }: HeaderProps) => {
           </Box>
         )}
 
-        {/* Ações do Header */}
+        {/* Ações do header: tema, notificações e usuário. */}
         <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 0.5, sm: 1 } }}>
           {/* Toggle Tema */}
           <IconButton
@@ -224,7 +225,7 @@ const Header = ({ onMenuClick, showMenuButton = false }: HeaderProps) => {
         </Box>
       </Toolbar>
 
-      {/* Menu de Notificações */}
+      {/* Menu suspenso de notificações simuladas. */}
       <Menu
         anchorEl={notifAnchor}
         open={Boolean(notifAnchor)}
@@ -287,7 +288,7 @@ const Header = ({ onMenuClick, showMenuButton = false }: HeaderProps) => {
         </MenuItem>
       </Menu>
 
-      {/* Menu de Navegação Mobile */}
+      {/* Menu suspenso com a navegação quando estamos no mobile. */}
       <Menu
         anchorEl={navMenuAnchor}
         open={Boolean(navMenuAnchor)}
@@ -321,7 +322,7 @@ const Header = ({ onMenuClick, showMenuButton = false }: HeaderProps) => {
         ))}
       </Menu>
 
-      {/* Menu do Usuário */}
+      {/* Menu de ações do usuário logado. */}
       <Menu
         anchorEl={userAnchor}
         open={Boolean(userAnchor)}

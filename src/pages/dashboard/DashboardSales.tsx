@@ -6,6 +6,7 @@ const DashboardSales = () => {
 
   return (
     <Box>
+      {/* Cabeçalho da seção de vendas dentro do módulo Dashboard. */}
       <Box sx={{ mb: 4 }}>
         <Typography
           variant="h4"
@@ -35,6 +36,7 @@ const DashboardSales = () => {
         }}
       >
         <CardContent>
+          {/* Espaço reservado para pipeline de vendas, tabelas ou gráficos. */}
           <Typography
             variant="h6"
             sx={{

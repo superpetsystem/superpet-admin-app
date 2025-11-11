@@ -6,6 +6,7 @@ const ReportsExport = () => {
 
   return (
     <Box>
+      {/* Cabeçalho para exportações de relatórios. */}
       <Box sx={{ mb: 4 }}>
         <Typography
           variant="h4"
@@ -35,6 +36,7 @@ const ReportsExport = () => {
         }}
       >
         <CardContent>
+          {/* Área para configurações de formatos, filtros e agendamentos. */}
           <Typography
             variant="h6"
             sx={{

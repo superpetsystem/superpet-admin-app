@@ -6,6 +6,7 @@ const DashboardCustomers = () => {
 
   return (
     <Box>
+      {/* Cabeçalho para o CRM dentro do painel. */}
       <Box sx={{ mb: 4 }}>
         <Typography
           variant="h4"
@@ -35,6 +36,7 @@ const DashboardCustomers = () => {
         }}
       >
         <CardContent>
+          {/* Espaço reservado para listagens, funil e segmentações. */}
           <Typography
             variant="h6"
             sx={{

@@ -6,6 +6,7 @@ const DashboardInventory = () => {
 
   return (
     <Box>
+      {/* Cabeçalho do módulo de gestão de estoque. */}
       <Box sx={{ mb: 4 }}>
         <Typography
           variant="h4"
@@ -35,6 +36,7 @@ const DashboardInventory = () => {
         }}
       >
         <CardContent>
+          {/* Espaço destinado ao acompanhamento de níveis de estoque. */}
           <Typography
             variant="h6"
             sx={{

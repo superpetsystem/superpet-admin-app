@@ -6,6 +6,7 @@ const DashboardAnalytics = () => {
 
   return (
     <Box>
+      {/* Cabeçalho para contextualizar os gráficos de análise. */}
       <Box sx={{ mb: 4 }}>
         <Typography
           variant="h4"
@@ -35,6 +36,7 @@ const DashboardAnalytics = () => {
         }}
       >
         <CardContent>
+          {/* Espaço reservado para dashboards com KPIs e séries temporais. */}
           <Typography
             variant="h6"
             sx={{

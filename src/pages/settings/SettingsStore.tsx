@@ -6,6 +6,7 @@ const SettingsStore = () => {
 
   return (
     <Box>
+      {/* Cabeçalho específico da subseção de loja. */}
       <Box sx={{ mb: 4 }}>
         <Typography
           variant="h4"
@@ -35,6 +36,7 @@ const SettingsStore = () => {
         }}
       >
         <CardContent>
+          {/* Espaço para formulários detalhados da loja. */}
           <Typography
             variant="h6"
             sx={{
